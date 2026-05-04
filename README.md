@@ -1,3 +1,4 @@
 # work done 
 workable the project  
-vut minor mistake add some point 
+but minor mistake add some point 
+isssue resolved very soon 
