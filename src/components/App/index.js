@@ -5,6 +5,7 @@ import Loader from '../Loader';
 import Main from '../Main';
 import Quiz from '../Quiz';
 import Result from '../Result';
+import Settings from '../Settings';
 
 import { shuffle } from '../../utils';
 
@@ -16,6 +17,7 @@ const App = () => {
   const [isQuizStarted, setIsQuizStarted] = useState(false);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [resultData, setResultData] = useState(null);
+  const [showSettings, setShowSettings] = useState(false);
 
   const startQuiz = (data, countdownTime) => {
     setLoading(true);
@@ -86,11 +88,18 @@ const App = () => {
     }, 1000);
   };
 
+  const toggleSettings = () => {
+    setShowSettings(!showSettings);
+  };
+
   return (
     <Layout>
       {loading && <Loader {...loadingMessage} />}
-      {!loading && !isQuizStarted && !isQuizCompleted && (
-        <Main startQuiz={startQuiz} />
+      {!loading && showSettings && (
+        <Settings onBackToHome={toggleSettings} />
+      )}
+      {!loading && !isQuizStarted && !isQuizCompleted && !showSettings && (
+        <Main startQuiz={startQuiz} onSettingsClick={toggleSettings} />
       )}
       {!loading && isQuizStarted && (
         <Quiz data={data} countdownTime={countdownTime} endQuiz={endQuiz} />

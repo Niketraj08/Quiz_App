@@ -23,7 +23,7 @@ import { shuffle } from '../../utils';
 
 import Offline from '../Offline';
 
-const Main = ({ startQuiz }) => {
+const Main = ({ startQuiz, onSettingsClick }) => {
   const [category, setCategory] = useState('0');
   const [numOfQuestions, setNumOfQuestions] = useState(5);
   const [difficulty, setDifficulty] = useState('easy');
@@ -121,6 +121,13 @@ const Main = ({ startQuiz }) => {
             <Item.Content>
               <Item.Header>
                 <h1>The Ultimate Quiz</h1>
+                <Button
+                  circular
+                  icon="cog"
+                  onClick={onSettingsClick}
+                  floated="right"
+                  title="Settings"
+                />
               </Item.Header>
               {error && (
                 <Message error onDismiss={() => setError(null)}>
@@ -240,6 +247,7 @@ const Main = ({ startQuiz }) => {
 
 Main.propTypes = {
   startQuiz: PropTypes.func.isRequired,
+  onSettingsClick: PropTypes.func.isRequired,
 };
 
 export default Main;
